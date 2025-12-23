@@ -81,9 +81,9 @@ const LoginPage = () => {
         
         <p className="mt-8 text-center text-gray-400 text-sm">
           Don't have an account? 
-          <a href="/register" className="text-purple-400 hover:text-purple-300 font-medium ml-1 transition duration-200">
+          <link to="/login" className="text-purple-400 hover:text-purple-300 font-medium ml-1 transition duration-200">
             Sign Up here
-          </a>
+          </link>
         </p>
       </div>
     </div>
