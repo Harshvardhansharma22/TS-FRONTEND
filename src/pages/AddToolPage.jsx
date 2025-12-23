@@ -20,7 +20,7 @@ const AddToolPage = () => {
     navigate('/login');
     return null;
   }
-
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,7 +42,7 @@ const AddToolPage = () => {
     formData.append('image', image);
 
     try {
-      await api.post('/tools', formData, {
+      await api.post(`${VITE_BACKEND_URL}/tools`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       navigate('/');

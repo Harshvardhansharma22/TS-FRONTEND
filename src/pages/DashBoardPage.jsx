@@ -17,14 +17,14 @@ const DashboardPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const socket = useSocket();
-
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
   /* ---------------- FETCH BOOKINGS ---------------- */
   useEffect(() => {
     if (!user) return;
     const fetchBookings = async () => {
       setLoading(true);
       try {
-        const { data } = await api.get('/bookings/my-bookings');
+        const { data } = await api.get(`${VITE_BACKEND_URL}/bookings/my-bookings`);
         setBookings(data);
       } catch (err) {
         console.error(err);

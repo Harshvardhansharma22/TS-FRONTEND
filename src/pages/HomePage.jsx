@@ -62,7 +62,7 @@ const HomePage = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,12 +71,12 @@ const HomePage = () => {
         const dist = 50000;
 
         const toolsResponse = await api.get(
-          `/tools/nearby?lat=${lat}&lng=${lng}&dist=${dist}`
+          `${VITE_BACKEND_URL}/tools/nearby?lat=${lat}&lng=${lng}&dist=${dist}`
         );
         setTools(toolsResponse.data || []);
 
         try {
-          const usersResponse = await api.get('/users/online');
+          const usersResponse = await api.get(`${VITE_BACKEND_URL}/users/online`);
           setOnlineUsers(usersResponse.data.map(u => u._id));
         } catch {}
       } catch (err) {

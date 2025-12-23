@@ -10,12 +10,12 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { login } = useAuth();
-
+const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      const { data } = await api.post('/auth/register', { name, email, password });
+      const { data } = await api.post(`${VITE_BACKEND_URL}/auth/register`, { name, email, password });
       login(data);
       navigate('/');
     } catch (err) {
