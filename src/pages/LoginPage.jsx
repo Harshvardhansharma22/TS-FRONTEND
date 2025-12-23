@@ -14,10 +14,9 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
+    const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
     try {
-      const { data } = await api.post('/auth/login', { email, password });
-      // store user via context/localStorage
+      const { data } = await api.post('${VITE_BACKEND_URL}/auth/login', { email, password });
       login(data);
       navigate('/');
     } catch (err) {

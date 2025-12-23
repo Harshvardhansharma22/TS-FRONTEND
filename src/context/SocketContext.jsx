@@ -17,7 +17,9 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
        console.log('--- 1. FRONTEND: User logged in. Attempting to connect to socket... ---');
-      const newSocket = io('http://localhost:3000');
+      const rawSocketUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+      const socketUrl = String(rawSocketUrl).replace(/\/$/, '');
+      const newSocket = io(socketUrl);
       setSocket(newSocket);
       newSocket.on('connect', () => {
         console.log('Socket connected:', newSocket.id);

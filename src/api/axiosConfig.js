@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const rawBase = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+const base = String(rawBase).replace(/\/$/, '');
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api', // Your backend URL
+  baseURL: `${base}/api`,
 });
 
 // Interceptor to add the token to every request if the user is logged in
