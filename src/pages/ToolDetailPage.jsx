@@ -13,7 +13,6 @@ const ToolDetailPage = () => {
   const [requestCount, setRequestCount] = useState(0);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -33,11 +32,11 @@ const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3
 
     const fetchData = async () => {
       try {
-        const { data: toolData } = await api.get(`${VITE_BACKEND_URL}/tools/${id}`);
+        const { data: toolData } = await api.get(`/tools/${id}`);
         setTool(toolData);
 
         if (user) {
-          const { data: bookingsData } = await api.get(`${VITE_BACKEND_URL}/bookings/my-bookings`);
+          const { data: bookingsData } = await api.get('/bookings/my-bookings');
           const userRequestsForThisTool = bookingsData.filter(
             b => b.tool._id === id && b.borrower._id === user._id
           );
@@ -86,7 +85,7 @@ const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3
     setBookingMessage('');
 
     try {
-      await api.post(`${VITE_BACKEND_URL}/bookings`, {
+      await api.post('/bookings', {
         toolId: tool._id,
         startDate,
         endDate,
